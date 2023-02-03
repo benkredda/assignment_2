@@ -1,5 +1,5 @@
 ![rqt](https://user-images.githubusercontent.com/116979828/216663283-f0e682ba-4985-40c0-8bd0-a66da79496d9.PNG)
-![rqt](https://user-images.githubusercontent.com/116979828/216663379-65b515a8-9dd4-4968-9cb3-989c4cf81a20.PNG)
+
 # assignment_2 report
 ## general explanation of the assignment and its purpose
 in this assignment i created three nodes Node_a ,Node_b, Node_cand each one has a different code and they are all found in a folder called scripts + another folder msg containing message file named custom.msg + launch folder containing launch file named assignment_2.launch .
