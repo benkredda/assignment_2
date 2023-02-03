@@ -1,3 +1,5 @@
+![rqt](https://user-images.githubusercontent.com/116979828/216663283-f0e682ba-4985-40c0-8bd0-a66da79496d9.PNG)
+![rqt](https://user-images.githubusercontent.com/116979828/216663379-65b515a8-9dd4-4968-9cb3-989c4cf81a20.PNG)
 # assignment_2 report
 ## general explanation of the assignment and its purpose
 in this assignment i created three nodes Node_a ,Node_b, Node_cand each one has a different code and they are all found in a folder called scripts + another folder msg containing message file named custom.msg + launch folder containing launch file named assignment_2.launch .
@@ -56,7 +58,11 @@ the average velocity is computed using the last 5 messages
 a launch file is created to start the whole simulation setting the value for the frequency at which Node_c publishes the information is set.
 the simulation of the nodes is shown in the pdf named the simulations attached below
 the flowchart of the Node_a is in a different pdf named flowchart of Node_a attached below  
-the computational graph is also in a pdf name computational graph showing the main relationships between topics,nodes,...
+the computational graph is also in a pdf name computational graph showing the main relationships between topics,nodes,... that are active 
+to get the coputational graph the following command should be run in the terminal 
+
+`$ rqt_graph`
+
 ## Rviz
 rviz (short for “ROS visualization”) is a 3D visualization software tool for robots, sensors, and algorithms. It enables you to see the robot’s perception of its world (real or simulated).
 The purpose of rviz is to enable you to visualize the state of a robot. It uses sensor data to try to create an accurate depiction of what is going on in the robot’s environment.
