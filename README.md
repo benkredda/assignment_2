@@ -27,7 +27,7 @@ the  node subscribes to the robot’s position and velocity (using the custom me
 the distance is computed using the low :
 $$desired.position.distance =\(\sqrt{(desired.position.x-current.position.x)^2+(desired.poition.y -current.position.y)^2\)}$$ 
 Inline $$the. current.velocity=\(\sqrt{(current.velocity.x)^2+(current.velocity.y)^2\)}$$ 
-
+the average velocity is computed using the last 5 messages
 a launch file is created to start the whole simulation setting the value for the frequency at which Node_c publishes the information is set.
 the simulation of the nodes is shown in the pdf named simulations attached below
 the flowchart of the Node_a is in a different pdf named flowchart of Node_a attached below  
