@@ -37,3 +37,10 @@ Gazebo is a 3D robot simulator. Its objective is to simulate a robot, giving you
 ## the main difference between Rviz and Gazebo 
 rviz shows you what the robot thinks is happening, while Gazebo shows you what is really happening
 
+$$E=mc^2$$
+
+Inline $$E=mc^2$$ Inline，Inline $$E=mc^2$$ Inline。
+
+$$\(\sqrt{3x-1}+(1+x)^2\)$$
+                    
+$$\sin(\alpha)^{\theta}=\sum_{i=0}^{n}(x^i + \cos(f))$$
