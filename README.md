@@ -24,6 +24,12 @@ it is a service node that, when called, prints the number of goals reached and c
 then a service is created and called to print the number of reached and canceled goals in the terminal.
 ### Node_c :  
 the  node subscribes to the robot’s position and velocity (using the custom message)  which means it subscribes in the topic /odom_custom where the message is of type odom_custom_msg ,and prints the distance of the robot from the target and the robot’s average velocity. a parameter is used to set how fast the node publishes the information .
+the distance is computed using the low :
+$$desired position distance =mc^2$$
+
+Inline $$E=\(\sqrt{(desired position x-current position x)^2}+(desired poition y -current position y)^2\)$$ 
+Inline $$the current velocity=\(\sqrt{(current velocity x)^2}+(current velocity y)^2\)$$ 
+
 a launch file is created to start the whole simulation setting the value for the frequency at which Node_c publishes the information is set.
 the simulation of the nodes is shown in the pdf named simulations attached below
 the flowchart of the Node_a is in a different pdf named flowchart of Node_a attached below  
@@ -37,10 +43,3 @@ Gazebo is a 3D robot simulator. Its objective is to simulate a robot, giving you
 ## the main difference between Rviz and Gazebo 
 rviz shows you what the robot thinks is happening, while Gazebo shows you what is really happening
 
-$$E=mc^2$$
-
-Inline $$E=mc^2$$ Inline，Inline $$E=mc^2$$ Inline。
-
-$$\(\sqrt{3x-1}+(1+x)^2\)$$
-                    
-$$\sin(\alpha)^{\theta}=\sum_{i=0}^{n}(x^i + \cos(f))$$
