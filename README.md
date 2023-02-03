@@ -5,11 +5,15 @@ in this assignment i created three nodes Node_a ,Node_b, Node_cand each one has 
 there are some steps that need to be done before launching the package 
 1. create a workspace 
 2. source the workspace by editing the .bashrc 
-3. go to src folder and clone the package given by the professor using the command `$ git clone https://github.com/CarmineD8/assignment_2_2022 ` `$`
-4. again in the src folder clone my package assignment_2
-5. run the command `$ catkin_make` in the terminal opened in workspace
-6. run the command `$ source ~/my_ros_ws/devel/setup.bash `
-7.to launch all the nodes and see the whole simulation run the command `$ roslaunch assignment_2 assignment_2.launch`
+3. go to src folder and clone the package given by the professor using the command 
+`$ git clone https://github.com/CarmineD8/assignment_2_2022 ` `$`
+5. again in the src folder clone my package assignment_2
+6. run the command `$ catkin_make` in the terminal opened in workspace
+7. run the command :
+`$ source ~/my_ros_ws/devel/setup.bash `
+9.to launch all the nodes and see the whole simulation run the command :
+`$ roslaunch assignment_2 assignment_2.launch`
+
 ### Node_a :
 it implements an action client, allowing the user to set a target (x, y) or to cancel it.to do so i have created an interface where the user can choose one operation among the three operations and each operation is a function that can do the following tasks :
 1. target() to allow the user set the positions x and y of the target , then create and send the goal to the action server using the planning action file found in the professor's package assignment_2_2022, the robot will move to reach the target .
