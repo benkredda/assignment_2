@@ -27,4 +27,13 @@ the  node subscribes to the robot’s position and velocity (using the custom me
 a launch file is created to start the whole simulation setting the value for the frequency at which Node_c publishes the information is set.
 the simulation of the nodes is shown in the pdf named simulations attached below
 the flowchart of the Node_a is in a different pdf named flowchart of Node_a attached below  
-![Screenshot](first im.png)
+## Rviz
+rviz (short for “ROS visualization”) is a 3D visualization software tool for robots, sensors, and algorithms. It enables you to see the robot’s perception of its world (real or simulated).
+The purpose of rviz is to enable you to visualize the state of a robot. It uses sensor data to try to create an accurate depiction of what is going on in the robot’s environment.
+
+## Gazebo
+Gazebo is a 3D robot simulator. Its objective is to simulate a robot, giving you a close substitute to how your robot would behave in a real-world physical environment. It can compute the impact of forces (such as gravity).
+
+## the main difference between Rviz and Gazebo 
+rviz shows you what the robot thinks is happening, while Gazebo shows you what is really happening
+
