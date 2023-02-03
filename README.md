@@ -25,10 +25,8 @@ then a service is created and called to print the number of reached and canceled
 ### Node_c :  
 the  node subscribes to the robot’s position and velocity (using the custom message)  which means it subscribes in the topic /odom_custom where the message is of type odom_custom_msg ,and prints the distance of the robot from the target and the robot’s average velocity. a parameter is used to set how fast the node publishes the information .
 the distance is computed using the low :
-$$desired position distance =mc^2$$
-
-Inline $$E=\(\sqrt{(desired position x-current position x)^2}+(desired poition y -current position y)^2\)$$ 
-Inline $$the current velocity=\(\sqrt{(current velocity x)^2}+(current velocity y)^2\)$$ 
+$$desired.position.distance =\(\sqrt{(desired.position.x-current.position.x)^2}+(desired.poition.y -current.position.y)^2\)$$ 
+Inline $$the. current.velocity=\(\sqrt{(current.velocity.x)^2}+(current.velocity.y)^2\)$$ 
 
 a launch file is created to start the whole simulation setting the value for the frequency at which Node_c publishes the information is set.
 the simulation of the nodes is shown in the pdf named simulations attached below
