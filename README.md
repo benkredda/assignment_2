@@ -54,7 +54,7 @@ $$the. current.velocity=\(\sqrt{(current.velocity.x)^2+(current.velocity.y)^2\)}
 the average velocity is computed using the last 5 messages
 
 a launch file is created to start the whole simulation setting the value for the frequency at which Node_c publishes the information is set.
-the simulation of the nodes is shown in the pdf named simulations attached below
+the simulation of the nodes is shown in the pdf named the simulations attached below
 the flowchart of the Node_a is in a different pdf named flowchart of Node_a attached below  
 
 ## Rviz
@@ -66,4 +66,6 @@ Gazebo is a 3D robot simulator. Its objective is to simulate a robot, giving you
 
 ## the main difference between Rviz and Gazebo 
 rviz shows you what the robot thinks is happening, while Gazebo shows you what is really happening
+[The flowchart of the first Node.pdf](https://github.com/benkredda/assignment_2/files/10580600/The.flowchart.of.the.first.Node.pdf)
+[the simulations .pdf](https://github.com/benkredda/assignment_2/files/10580601/the.simulations.pdf)
 
