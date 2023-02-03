@@ -19,6 +19,7 @@ there are some steps that need to be done before launching the package
 9.to launch all the nodes and see the whole simulation run the command :
 
 `$ roslaunch assignment_2 assignment_2.launch`
+
 ## The explanation of the nodes
 ### Node_a :
 it implements an action client, allowing the user to set a target (x, y) or to cancel it.to do so i have created an interface where the user can choose one operation among the three operations and each operation is a function that can do the following tasks :
@@ -40,7 +41,10 @@ for this reason there should be another terminal to send the request where we ru
 after that the Node_b will print the number of reached and canceled goals.
 
 ### Node_c :  
-the  node subscribes to the robot’s position and velocity (using the custom message)  which means it subscribes in the topic /odom_custom where the message is of type odom_custom_msg ,and prints the distance of the robot from the target and the robot’s average velocity. a parameter is used to set how fast the node publishes the information .
+the  node subscribes to the robot’s position and velocity (using the custom message)  which means it subscribes in the topic /odom_custom where the message is of type odom_custom_msg ,and prints the distance of the robot from the target and the robot’s average velocity. a parameter is used to set how fast the node publishes the information using these commands :
+
+`$ rosparam set print_dist <value>`
+
 the distance and the average velocity are computed using the low :
 
 $$des.pos.dist =\(\sqrt{(desired.position.x-current.position.x)^2+(desired.poition.y -current.position.y)^2\)}$$ 
