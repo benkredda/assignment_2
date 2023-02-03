@@ -5,11 +5,11 @@ in this assignment i created three nodes Node_a ,Node_b, Node_cand each one has 
 there are some steps that need to be done before launching the package 
 1. create a workspace 
 2. source the workspace by editing the .bashrc 
-3. go to src folder and clone the package given by the professor using the command git clone https://github.com/CarmineD8/assignment_2_2022 
+3. go to src folder and clone the package given by the professor using the command `$ git clone https://github.com/CarmineD8/assignment_2_2022 ` `$`
 4. again in the src folder clone my package assignment_2
-5. run the command catkin_make in the terminal opened in workspace
-6. run the command source ~/my_ros_ws/devel/setup.bash
-7.to launch all the nodes and see the whole simulation run the command roslaunch assignment_2 assignment_2.launch
+5. run the command `$ catkin_make` in the terminal opened in workspace
+6. run the command `$ source ~/my_ros_ws/devel/setup.bash `
+7.to launch all the nodes and see the whole simulation run the command `$ roslaunch assignment_2 assignment_2.launch`
 ### Node_a :
 it implements an action client, allowing the user to set a target (x, y) or to cancel it.to do so i have created an interface where the user can choose one operation among the three operations and each operation is a function that can do the following tasks :
 1. target() to allow the user set the positions x and y of the target , then create and send the goal to the action server using the planning action file found in the professor's package assignment_2_2022, the robot will move to reach the target .
@@ -22,6 +22,10 @@ published on the topic /odom. so at first the node subscribes in the topic /odom
 ### Node_b :
 it is a service node that, when called, prints the number of goals reached and canceled; so first the node subscribes to the topic /reaching_goal/result and gets data and calls the callback_subscriber function when a message is received on the topic /reaching_goal/result which is of type PlanningAction/Result,this function increments the global variables canceled_goals and reached_goals depending on the status message that can be an integer : 2 canceled and 3 reached.
 then a service is created and called to print the number of reached and canceled goals in the terminal.
+for this reason there should be another terminal to send the request where we run the command :
+`$ rosservice call /reach_cancel_goal`
+after that the Node_b will print the number of reached and canceled goals
+
 ### Node_c :  
 the  node subscribes to the robot’s position and velocity (using the custom message)  which means it subscribes in the topic /odom_custom where the message is of type odom_custom_msg ,and prints the distance of the robot from the target and the robot’s average velocity. a parameter is used to set how fast the node publishes the information .
 the distance is computed using the low :
