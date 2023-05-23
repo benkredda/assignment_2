@@ -2,6 +2,8 @@
 
 # assignment_2 report
 ## general explanation of the assignment and its purpose
+### For the documentation please click here :
+https://benkredda.github.io/assignment_2/
 in this assignment i created three nodes Node_a ,Node_b, Node_cand each one has a different code and they are all found in a folder called scripts + another folder msg containing message file named custom.msg + launch folder containing launch file named assignment_2.launch .
 ## How the assignment works and what are the important commands to launch/run it:
 
