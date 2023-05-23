@@ -1,0 +1,9 @@
+Node A
+======
+
+.. automodule:: scripts.Node_a
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+

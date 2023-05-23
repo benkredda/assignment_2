@@ -1,0 +1,45 @@
+.. assignment_2 documentation master file, created by
+   sphinx-quickstart on Thu May 18 17:33:00 2023.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to assignment_2's documentation!
+========================================
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Contents:
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+
+assignment_2 documentation!
+**************************************
+
+This is the documentation of the assignment_2 package!
+
+Node_a Module
+===========================
+
+.. automodule:: scripts.Node_a
+  :members:
+
+Node_b Module
+================
+
+.. automodule:: scripts.Node_b
+  :members:
+
+Node_c Module
+==================================
+
+.. automodule:: scripts.Node_c
+  :members:
+  
