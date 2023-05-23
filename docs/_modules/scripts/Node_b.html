@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scripts.Node_b &mdash; assignment_2 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            assignment_2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">assignment_2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">scripts.Node_b</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for scripts.Node_b</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python3</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">My second ROS Node</span>
+<span class="sd">===================</span>
+
+<span class="sd">Overview</span>
+<span class="sd">-------------------</span>
+
+<span class="sd">This node is responsible for printing the number of goals reached and canceled. It subscribes to the `/reaching_goal/result` topic to receive data and calls the `callback_subscriber` function when a message of type `PlanningAction/Result` is received.</span>
+
+<span class="sd">Upon receiving a message on the `/reaching_goal/result` topic, the `callback_subscriber` function is triggered. It increments the global variables `canceled_goals` and `reached_goals` based on the status message received, where the status can be represented as an integer. Additionally, a service is created and called to print the number of reached and canceled goals in the terminal. To send the request and trigger the printing, you need to run the following command in a separate terminal:</span>
+
+<span class="sd">.. code-block:: bash</span>
+
+<span class="sd">   $ rosservice call /reach_cancel_goal</span>
+
+<span class="sd">This command invokes the service and triggers the printing of the number of reached and canceled goals by Node_b.</span>
+
+<span class="sd">Usage</span>
+<span class="sd">~~~~~</span>
+
+<span class="sd">To use this node, follow these steps:</span>
+
+<span class="sd">1. Launch the necessary ROS nodes and topics required for communication.</span>
+<span class="sd">2. Run the Node_b Python script to start the service node.</span>
+<span class="sd">3. In a separate terminal, use the `rosservice call` command as shown above to send the request and print the goals information.</span>
+
+
+<span class="sd">Functions</span>
+<span class="sd">---------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1">#import rospy</span>
+<span class="c1">#from std_srvs.srv import Empty,EmptyResponse</span>
+<span class="c1">#import assignment_2_2022.msg</span>
+<span class="c1">#import os</span>
+
+
+
+<span class="c1">#global variables</span>
+<span class="n">reached_goals</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">canceled_goals</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sequence</span> <span class="o">=</span> <span class="mi">1</span> 
+<span class="n">start_description_flag</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">print_flag</span> <span class="o">=</span> <span class="kc">True</span>
+
+ 
+<div class="viewcode-block" id="callback_service"><a class="viewcode-back" href="../../index.html#scripts.Node_b.callback_service">[docs]</a><span class="k">def</span> <span class="nf">callback_service</span><span class="p">(</span><span class="n">req</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Callback function called when the service is called to print the number of reached and</span>
+<span class="sd">    canceled goals. It returns an empty response and the sequence number of the service call,</span>
+<span class="sd">    which is a global variable. The sequence number is used to track the number of calls made.</span>
+
+<span class="sd">    :param req: The service request</span>
+<span class="sd">    :type req: EmptyRequest</span>
+<span class="sd">    :returns: The service response</span>
+<span class="sd">    :rtype: EmptyResponse</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Function code :</span>
+    <span class="k">global</span> <span class="n">canceled_goals</span> <span class="p">,</span> <span class="n">reached_goals</span> <span class="p">,</span> <span class="n">sequence</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sequence: </span><span class="si">{</span><span class="n">sequence</span><span class="si">}</span><span class="se">\n</span><span class="s2">Number of canceled goals: </span><span class="si">{</span><span class="n">canceled_goals</span><span class="si">}</span><span class="se">\n</span><span class="s2">Number of reached goals: </span><span class="si">{</span><span class="n">reached_goals</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------&quot;</span><span class="p">)</span>
+    <span class="n">sequence</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">EmptyResponse</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="callback_subscriber"><a class="viewcode-back" href="../../index.html#scripts.Node_b.callback_subscriber">[docs]</a><span class="k">def</span> <span class="nf">callback_subscriber</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Callback function called when a message is received on the topic `/reaching_goal/result`,</span>
+<span class="sd">    which is of type `PlanningAction/Result`. This function increments the global variables</span>
+<span class="sd">    `canceled_goals` and `reached_goals` depending on the status message, which can be an</span>
+<span class="sd">    integer (2 for canceled, 3 for reached).</span>
+
+<span class="sd">    :param data: The received goal status</span>
+<span class="sd">    :type data: PlanningActionResult</span>
+<span class="sd">    :returns: None</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Function code :</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+
+        <span class="k">global</span> <span class="n">canceled_goals</span>
+        <span class="n">canceled_goals</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+
+        <span class="k">global</span> <span class="n">reached_goals</span>
+        <span class="n">reached_goals</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="start_description"><a class="viewcode-back" href="../../index.html#scripts.Node_b.start_description">[docs]</a><span class="k">def</span> <span class="nf">start_description</span><span class="p">(</span><span class="n">start_description_flag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function called to print the description of the node and wait for the user to press enter.</span>
+<span class="sd">    It also sets the `start_description_flag` to 0.</span>
+
+<span class="sd">    :param start_description_flag: Flag indicating whether the description has been printed</span>
+<span class="sd">    :type start_description_flag: int</span>
+<span class="sd">    :returns: None</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Function code :</span>
+    <span class="k">if</span> <span class="n">start_description_flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;clear&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">------------------Node_b description------------------</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This node is a service node that, when called,&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prints the number of goals reached and canceled.&quot;</span><span class="p">)</span>
+        <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Press Enter to continue!&quot;</span><span class="p">)</span>
+        <span class="n">start_description_flag</span><span class="o">=</span><span class="mi">0</span>   </div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="c1"># Print the description of the node once</span>
+    <span class="n">start_description</span><span class="p">(</span><span class="n">start_description_flag</span><span class="p">)</span>
+
+    <span class="c1"># Initialize the node as &quot;Node_b&quot;</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;Node_b&#39;</span><span class="p">)</span>
+
+    
+    <span class="c1"># Subscribe to the &quot;/reaching_goal/result&quot; topic    </span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s2">&quot;/reaching_goal/result&quot;</span><span class="p">,</span> <span class="n">assignment_2_2022</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">PlanningActionResult</span><span class="p">,</span> <span class="n">callback_subscriber</span><span class="p">)</span>
+
+
+    <span class="c1"># Create the &quot;reach_cancel_goal&quot; service    </span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span><span class="s1">&#39;reach_cancel_goal&#39;</span><span class="p">,</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">callback_service</span><span class="p">)</span>
+
+
+    <span class="n">rate</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Rate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 1hz</span>
+    <span class="c1"># The node is alive until the user presses Ctrl+C</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
+        
+        <span class="k">if</span> <span class="n">print_flag</span><span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;waiting for a client to call the service ...&quot;</span><span class="p">)</span>   
+            <span class="n">print_flag</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">print_flag</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;waiting for a client to call the service ..&quot;</span><span class="p">)</span>
+            <span class="n">print_flag</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">print_flag</span>
+        
+        <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Roumaissa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
