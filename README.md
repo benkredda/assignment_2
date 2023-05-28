@@ -27,7 +27,8 @@ there are some steps that need to be done before launching the package
 it implements an action client, allowing the user to set a target (x, y) or to cancel it.to do so i have created an interface where the user can choose one operation among the three operations and each operation is a function that can do the following tasks :
 1. target() to allow the user set the positions x and y of the target , then create and send the goal to the action server using the planning action file found in the professor's package assignment_2_2022, the robot will move to reach the target .
 2. cancel() to cancel the target , the robot will stop in the moment of canceling
-3. exit() to exit 
+3. exit() to exit.
+ 
 the wrong_input() function is when the user enters a wrong input.
 after each function the interface will appear again asking the user to select an operation
 also the node publishes the robot position and velocity as a custom message (x,y, vel_x, vel_z), by relying on the values
