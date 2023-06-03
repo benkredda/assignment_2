@@ -3,27 +3,44 @@
 # assignment_2 report
 ## About jupyter notebook :
 
-### ROS Interactive Goal Planner
+### ROS Interactive Goal Planner :
+
 This repository contains a ROS (Robot Operating System) package that implements an interactive goal planner for a robot. The goal planner allows the user to set target positions for the robot using a graphical user interface (GUI) and visualizes the robot's trajectory, target positions, and the closest obstacle distance.
 
-#### Prerequisites
+#### Prerequisites:
+
 Make sure you have the following prerequisites installed:
 
 ROS (Robot Operating System):nstallation Guide
 
 #### Installation :
+
 Clone this repository into your catkin workspace:
+
 `$ cd /path/to/your/catkin_workspace/src`.
 
+
 `$ git clone https://github.com/your-username/interactive_goal_planner.git`.
+
+
 Build the package :
+
 `$ cd /path/to/your/catkin_workspace`.
+
+
 `$ catkin_make`.
+
+
 #### Usage :
 Launch the ROS master:
+
 `$ roscore`.
+
+
 Run the interactive goal planner:
+
 `$ rosrun interactive_goal_planner interactive_goal_planner.py`.
+
 
 Use the GUI to enter target positions:
 
@@ -32,7 +49,9 @@ Click the "Set Target" button to send the goal to the robot.
 The robot's trajectory, target positions, and the closest obstacle distance will be displayed in the GUI.
 
 ### Customization :
+
 The behavior of the interactive goal planner can be customized by modifying the interactive_goal_planner.py file. Here are the main parts you can customize:
+
 
 odo_callback(msg): This function is called whenever the robot's odometry information is received. You can modify this function to extract and process any relevant information from the odometry message.
 
